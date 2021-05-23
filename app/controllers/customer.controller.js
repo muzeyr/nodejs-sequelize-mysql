@@ -1,5 +1,8 @@
 const db = require("../models");
 const Customer = db.customers;
+
+const customerSave = require('../dto/customerSave');
+
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Tutorial
@@ -13,12 +16,15 @@ exports.create = (req, res) => {
   }
 
   // Create a Tutorial
+  const cstr = customerSave;
+  
   const customer = {
     name: req.body.name,
     taxOffice: req.body.taxOffice,
     taxNumber: req.body.taxNumber,
     published: req.body.published ? req.body.published : false
   };
+  customerSave.card_code = req.body.card_code;
 
   // Save Customer in the database
   Customer.create(customer)
